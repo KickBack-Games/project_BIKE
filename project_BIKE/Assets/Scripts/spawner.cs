@@ -4,27 +4,23 @@ using UnityEngine;
 
 public class spawner : MonoBehaviour 
 {
-	public GameObject tree, noTree, player, pup1;
+	public GameObject tree, player;
 	public List<int> gridPos = new List<int>();
 
-	public int powerUpSpawnTimer, powerUpFrequency;
 
-
-	private playerMovement pm;
-	private int left = -53, 
-				leftCenter = -18, 
-				rightCenter = 18,
-				right = 53,
+	private PlayerMovement pm;
+	private int left = -40, 
+				leftCenter = -20,
+				middle = 0,
+				rightCenter = 20,
+				right = 40,
 				choice;
 
 	// Use this for initialization
 	void Start () 
 	{
-		powerUpSpawnTimer = 5;
 
-		powerUpFrequency = 3;
-		pm = player.GetComponent<playerMovement>();
-		spawn(-30);
+		pm = player.GetComponent<PlayerMovement>();
 	}
 	
 	// Update is called once per frame
@@ -43,11 +39,12 @@ public class spawner : MonoBehaviour
 		// fill with needed values
 		gridPos.Add(left);
 		gridPos.Add(leftCenter);
+		gridPos.Add(middle);
 		gridPos.Add(rightCenter);
 		gridPos.Add(right);
 
 		// spawn 3 trees
-		int iteration = 3;
+		int iteration = 4;
 		while(iteration > 0)
 		{
 			choice = Random.Range(0,gridPos.Count);
@@ -56,14 +53,7 @@ public class spawner : MonoBehaviour
 			iteration--;
 		}
 		// finally spawn the empty space object
-		Instantiate(noTree, new Vector2(gridPos[0], transform.position.y + off), Quaternion.identity);
-
-		if (pm.getPowerUpCounterOneUp() == powerUpSpawnTimer) {
-			Instantiate(pup1, new Vector2(gridPos[0], transform.position.y + off), Quaternion.identity);
-			powerUpSpawnTimer += powerUpFrequency;
-			powerUpFrequency += powerUpSpawnTimer;
-
-		}
+		//Instantiate(noTree, new Vector2(gridPos[0], transform.position.y + off), Quaternion.identity);
 
 		// remove so that when this function is called again, there are no duplicates
 		gridPos.RemoveAt(0);	
