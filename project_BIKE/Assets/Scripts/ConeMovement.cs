@@ -7,14 +7,13 @@ public class ConeMovement : MonoBehaviour
 	private GameObject GM;
 	private GameRules gr;
 	private Vector2 pos;
-    // Start is called before the first frame update
-    void Start()
-    {
-    	pos = transform.position;
-        GM = GameObject.FindGameObjectWithTag("GameManager");
-        gr = GM.GetComponent<GameRules>();
-    }
 
+	void Start() {
+		GM = GameObject.FindGameObjectWithTag("GameManager");
+		gr = GM.GetComponent<GameRules>();
+		pos = transform.position;  
+	}
+	
     // Update is called once per frame
     void Update()
     {

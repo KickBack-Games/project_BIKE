@@ -6,9 +6,10 @@ public class remover : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D col)
     {
-    	if (col.gameObject.tag == "remover")
+    	if (col.gameObject.tag == "Cone")
     	{
-        	Destroy(this.gameObject);
+    		print("Touch!");
+        	Destroy(col.gameObject);
     	}
     }
 }

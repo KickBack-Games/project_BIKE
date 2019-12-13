@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class spawner : MonoBehaviour 
 {
-	public GameObject tree, player;
+	public GameObject cone, player;
 	public List<int> gridPos = new List<int>();
-
 
 	private PlayerMovement pm;
 	private int left = -40, 
@@ -19,8 +18,8 @@ public class spawner : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-
 		pm = player.GetComponent<PlayerMovement>();
+		spawn(-30);
 	}
 	
 	// Update is called once per frame
@@ -29,7 +28,6 @@ public class spawner : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             print("R key was pressed");
-        
 			Application.LoadLevel (Application.loadedLevelName);
 		}
 	}
@@ -43,17 +41,19 @@ public class spawner : MonoBehaviour
 		gridPos.Add(rightCenter);
 		gridPos.Add(right);
 
-		// spawn 3 trees
+		// spawn 4 cones
 		int iteration = 4;
 		while(iteration > 0)
 		{
 			choice = Random.Range(0,gridPos.Count);
-			Instantiate(tree, new Vector2(gridPos[choice], transform.position.y + off), Quaternion.identity);
+			Instantiate(cone, new Vector2(gridPos[choice], transform.position.y + off), Quaternion.identity);
 			gridPos.RemoveAt(choice);
 			iteration--;
 		}
 		// finally spawn the empty space object
 		//Instantiate(noTree, new Vector2(gridPos[0], transform.position.y + off), Quaternion.identity);
+
+
 
 		// remove so that when this function is called again, there are no duplicates
 		gridPos.RemoveAt(0);	
