@@ -295,5 +295,5 @@ Assets\Scripts\onLoadGM.cs
 Assets\Scripts\PlayerMovement.cs
 Assets\Scripts\remover.cs
 Assets\Scripts\spawner.cs
-Assets\Scripts\spawnTimer.cs
 Assets\Scripts\Test.cs
+Assets\Scripts\UIController.cs

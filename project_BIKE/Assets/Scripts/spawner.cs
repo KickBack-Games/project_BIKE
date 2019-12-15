@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class spawner : MonoBehaviour 
 {
-	public GameObject cone, player;
+	public GameObject cone, coneScorer, player;
 	public List<int> gridPos = new List<int>();
 
 	private PlayerMovement pm;
@@ -19,7 +19,6 @@ public class spawner : MonoBehaviour
 	void Start () 
 	{
 		pm = player.GetComponent<PlayerMovement>();
-		spawn(-30);
 	}
 	
 	// Update is called once per frame
@@ -45,15 +44,16 @@ public class spawner : MonoBehaviour
 		int iteration = 4;
 		while(iteration > 0)
 		{
+
 			choice = Random.Range(0,gridPos.Count);
-			Instantiate(cone, new Vector2(gridPos[choice], transform.position.y + off), Quaternion.identity);
+			if (iteration == 4) 
+				Instantiate(coneScorer, new Vector2(gridPos[choice], transform.position.y + off), Quaternion.identity);
+			else 
+				Instantiate(cone, new Vector2(gridPos[choice], transform.position.y + off), Quaternion.identity);
+
 			gridPos.RemoveAt(choice);
 			iteration--;
 		}
-		// finally spawn the empty space object
-		//Instantiate(noTree, new Vector2(gridPos[0], transform.position.y + off), Quaternion.identity);
-
-
 
 		// remove so that when this function is called again, there are no duplicates
 		gridPos.RemoveAt(0);	
