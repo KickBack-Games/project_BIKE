@@ -41,6 +41,15 @@ public class GameRules : MonoBehaviour
     			coroutine = spawntimer(spawnSeconds);
     			StartCoroutine(coroutine);
     		}
+    		if (SCORE <= 3) {
+    			spawnSeconds = 1.5f;
+    		}
+    		else if (SCORE <= 6) {
+    			spawnSeconds = .9f;
+    		}
+    		else if (SCORE <= 9) {
+    			spawnSeconds = .6f;
+    		}
     	}
         
     }

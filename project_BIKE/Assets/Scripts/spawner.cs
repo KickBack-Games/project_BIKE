@@ -21,15 +21,6 @@ public class spawner : MonoBehaviour
 		pm = player.GetComponent<PlayerMovement>();
 	}
 	
-	// Update is called once per frame
-	void Update () 
-	{
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            print("R key was pressed");
-			Application.LoadLevel (Application.loadedLevelName);
-		}
-	}
 
 	public void spawn(int off)
 	{

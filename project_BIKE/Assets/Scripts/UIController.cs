@@ -40,6 +40,15 @@ public class UIController : MonoBehaviour
     	txtScore.text = scre.ToString();
     }
 
+    public void LOST() {
+    	inPlay = false;
+    	inLost = true;
+
+    	gmRules.GAMESPEED = 0;
+
+    	StartCoroutine(LostTimer(2));
+    }
+
     private void turnOngamePlayUI(){
     	gameplayUI.SetActive(true);
     }
@@ -51,5 +60,12 @@ public class UIController : MonoBehaviour
     }
     private void turnOffMenuUI(){
     	menuUI.SetActive(false);
+    }
+
+    IEnumerator LostTimer(int time)
+    {
+    	yield return new WaitForSeconds(time);
+    	Application.LoadLevel (Application.loadedLevelName);
+    	
     }
 }

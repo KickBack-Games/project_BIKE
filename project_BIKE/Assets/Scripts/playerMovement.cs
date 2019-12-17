@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 
 	// GAME MANAGER STUFF
 	public GameObject gm;
-
+	private UIController uic;
 
 	private Vector3 pos;
 	public float speed = 9.0f;
@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		uic = gm.GetComponent<UIController>();
 		pos = transform.position;
 		lost = false;
         onlyOnce = false;
@@ -42,22 +43,24 @@ public class PlayerMovement : MonoBehaviour
 			}
 			else
 			{
-				
-				if (Input.GetMouseButtonDown(0))
+				if (uic.inPlay) 
 				{
+					
+					if (Input.GetMouseButtonDown(0))
+					{
 
-					if ((mousePos.x >= Screen.width *.5f) && (pos.x < 40f) && (mousePos.y > Screen.height * .1f))
-					{
-	                	TapRight();
-	                }
-					else if ((mousePos.x < Screen.width *.5f) && (pos.x > -40f) && (mousePos.y > Screen.height * .1f)) 
-					{
-						TapLeft();
+						if ((mousePos.x >= Screen.width *.5f) && (pos.x < 40f) && (mousePos.y > Screen.height * .1f))
+						{
+		                	TapRight();
+		                }
+						else if ((mousePos.x < Screen.width *.5f) && (pos.x > -40f) && (mousePos.y > Screen.height * .1f)) 
+						{
+							TapLeft();
+						}
 					}
+					//pos += Vector3.down * forwardSpeed;
+					transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed); 
 				}
-				//pos += Vector3.down * forwardSpeed;
-				transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed); 
-				
 			}
 /*		}*/
 	}
@@ -82,14 +85,9 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
 	{
-		if(other.gameObject.tag == "hook") // For the opponents hitbox
+		if(other.gameObject.tag == "Cone" || other.gameObject.tag == "ConeScore") // For the opponents hitbox
 		{
-
-		}
-
-		if(other.gameObject.tag == "pupLife" && !lost)
-		{
-
+			uic.LOST();
 		}
 	}
 }
