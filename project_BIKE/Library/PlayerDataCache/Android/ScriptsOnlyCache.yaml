@@ -8,9 +8,12 @@ ScriptsOnlyBuild:
     - UIController
     - camera_movement
     - changePlayer
+    - jayWalkerBehavior
     - onLoadGM
     - remover
+    - scoreTriggerBehavior
     - spawner
+    - warningBehavior
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
@@ -73,31 +76,37 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9884}
     - Class: 114
-      Script: {instanceID: 10262}
+      Script: {instanceID: 10044}
     - Class: 114
-      Script: {instanceID: 10344}
+      Script: {instanceID: 10264}
     - Class: 114
-      Script: {instanceID: 10412}
+      Script: {instanceID: 10346}
     - Class: 114
-      Script: {instanceID: 10546}
+      Script: {instanceID: 10354}
     - Class: 114
-      Script: {instanceID: 10582}
+      Script: {instanceID: 10416}
     - Class: 114
-      Script: {instanceID: 10638}
+      Script: {instanceID: 10550}
     - Class: 114
-      Script: {instanceID: 10798}
+      Script: {instanceID: 10586}
     - Class: 114
-      Script: {instanceID: 10918}
+      Script: {instanceID: 10642}
     - Class: 114
-      Script: {instanceID: 11058}
+      Script: {instanceID: 10802}
     - Class: 114
-      Script: {instanceID: 11116}
+      Script: {instanceID: 10922}
     - Class: 114
-      Script: {instanceID: 11208}
+      Script: {instanceID: 11062}
     - Class: 114
-      Script: {instanceID: 11492}
+      Script: {instanceID: 11120}
     - Class: 114
-      Script: {instanceID: 12986}
+      Script: {instanceID: 11144}
+    - Class: 114
+      Script: {instanceID: 11214}
+    - Class: 114
+      Script: {instanceID: 11496}
+    - Class: 114
+      Script: {instanceID: 22912}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -195,7 +204,7 @@ ScriptsOnlyBuild:
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
-      Hash: 3cb20eb152fb72b81d6a62efa0f4c519
+      Hash: 90085beb3a38b884a5c661f09ded19a7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameRules
@@ -241,6 +250,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: AnimationTrack
+  - hash:
+      serializedVersion: 2
+      Hash: e3bb85cf68efacad03d3ab59ccb14303
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UIController
   - hash:
       serializedVersion: 2
       Hash: cf9f5cf2c3145a37ac07f00e50e460f9
@@ -309,10 +324,16 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
-      Hash: d42ebba9357da677b66bf07b927ee4ef
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: remover
+  - hash:
+      serializedVersion: 2
+      Hash: 578e9d81348311e186fb0ffbaacb08e4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: warningBehavior
   - hash:
       serializedVersion: 2
       Hash: da93233b636fe58fdf958e7643224bb6
@@ -393,7 +414,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 5f8ab8662784842919d7bbf164fafd3e
+      Hash: c19c76192fddc52e0afed5d451953b67
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: spawner
@@ -481,6 +502,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools
     className: BeforeAfterTestCommandState
+  - hash:
+      serializedVersion: 2
+      Hash: 0e93552418293430323f11b6f3cebc27
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: jayWalkerBehavior
   - hash:
       serializedVersion: 2
       Hash: 06031c1dc209daa8264e77e5a772c2af
@@ -597,10 +624,10 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: 9ce4cc683b25cb8ebafb6e9f64afe826
+      Hash: d42ebba9357da677b66bf07b927ee4ef
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: UIController
+    className: scoreTriggerBehavior
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
