@@ -5,13 +5,14 @@ using UnityEngine;
 public class GameRules : MonoBehaviour
 {
 	public float GAMESPEED, SCORE;
-	public float spawnSeconds;
-	public int distance;
-	public bool lost;
+	public float spawnSeconds, jwalkerSpawnSeconds;
+	public int distance, jaywalkercounter, coneModeCounter;
+	public bool lost, stopCones;
 
-	public GameObject spawnObj;
+	public GameObject spawnObj, warningObj;
 
 	private IEnumerator coroutine;
+
 
 	private UIController uic;
 	private spawner spawnScript;
@@ -22,8 +23,10 @@ public class GameRules : MonoBehaviour
     {
     	uic = GetComponent<UIController>();
     	lost = false;
+    	jaywalkercounter = 0;
 
     	spawnSeconds = 1.6f;
+    	jwalkerSpawnSeconds = .8f;
         spawnScript = spawnObj.GetComponent<spawner>();
     }
 
@@ -40,15 +43,12 @@ public class GameRules : MonoBehaviour
 
     			coroutine = spawntimer(spawnSeconds);
     			StartCoroutine(coroutine);
+    			StartCoroutine(switchStopConesBool(10, true));
     		}
-    		if (SCORE <= 3) {
-    			spawnSeconds = 1.5f;
-    		}
-    		else if (SCORE <= 6) {
-    			spawnSeconds = .9f;
-    		}
-    		else if (SCORE <= 9) {
-    			spawnSeconds = .6f;
+
+    		// Difficulty
+    		if (SCORE <= 10) {
+    			spawnSeconds = .7f;
     		}
     	}
         
@@ -66,7 +66,84 @@ public class GameRules : MonoBehaviour
     {
     	yield return new WaitForSeconds(secs);
     	spawnScript.spawn(distance);
-    	StartCoroutine(spawntimer(spawnSeconds));
+
+    	// Depending on the boolean, spawn cones or jaywalkers
+    	if (!stopCones)
+    		StartCoroutine(spawntimer(spawnSeconds));
+    	else
+    		StartCoroutine(WaitForSecondsToSpawnJayWalker(3));
     }
+    IEnumerator WaitForSecondsToSpawnJayWalker(float secs) 
+    {
+    	// Give a warning!
+    	Instantiate(warningObj, new Vector2(90f, 0), Quaternion.identity);
+
+    	yield return new WaitForSeconds(secs);
+
+    	// The chance var decides whether one or 2 jaywalkers will be spawned. The higher the score, the bigger the chance of 2 jw's
+    	float chance = Random.Range(0, SCORE);
+    	spawnScript.spawnJaywalkers(distance, chance);
+    	StartCoroutine(SpawnJaywalkers(jwalkerSpawnSeconds));
+    }
+
+    IEnumerator SpawnJaywalkers(float secs) 
+    {
+    	yield return new WaitForSeconds(secs);
+    	float chance = Random.Range(0, SCORE);
+    	spawnScript.spawnJaywalkers(distance, chance);
+
+		// Depending on the boolean, gp back to spawning cones or jaywalkers
+    	if (stopCones)
+    		StartCoroutine(SpawnJaywalkers(jwalkerSpawnSeconds));
+    	else{
+    		StartCoroutine(spawntimer(3)); // go back to cones, but give some time for the warning to go by
+    		Instantiate(warningObj, new Vector2(90f, 0), Quaternion.identity);
+    	}
+
+    }
+
+    IEnumerator switchStopConesBool(int secs, bool stop)
+   	{
+   		yield return new WaitForSeconds(secs);
+   		int length;
+   		stopCones = stop;
+   		if (stopCones) {
+   			// Time to turn it back to cones
+   			length = Random.Range(10, 20);
+   			coneModeCounter++;
+   			// Make it more difficult based on the amount of times it goes to jaywalkers
+   			if (coneModeCounter == 1) {
+   				jwalkerSpawnSeconds = .8f;
+   			}
+   			else if (coneModeCounter == 2) {
+   				jwalkerSpawnSeconds =.7f;
+   			} 
+   			else if (coneModeCounter == 3) {
+   				jwalkerSpawnSeconds = .6f;
+   			}
+   			else if (coneModeCounter == 4) {
+   				jwalkerSpawnSeconds = .57f;
+   			}
+   				
+   		} else {
+   			// Time to turn it to jaywalker
+   			length = Random.Range(20, 35);
+   			jaywalkercounter++;
+   			// Make it more difficult based on the amount of times it goes to jaywalkers
+   			if (jaywalkercounter == 1) {
+   				spawnSeconds = .6f;
+   			}
+   			else if (jaywalkercounter == 2) {
+   				spawnSeconds =.55f;
+   			} 
+   			else if (jaywalkercounter == 3) {
+   				spawnSeconds = .53f;
+   			}
+   			else if (jaywalkercounter == 4) {
+   				spawnSeconds = .52f;
+   			}
+   		}
+   		StartCoroutine(switchStopConesBool(length, !stop));
+   	}
 }
 

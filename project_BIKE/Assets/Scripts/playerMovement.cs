@@ -49,11 +49,11 @@ public class PlayerMovement : MonoBehaviour
 					if (Input.GetMouseButtonDown(0))
 					{
 
-						if ((mousePos.x >= Screen.width *.5f) && (pos.x < 40f) && (mousePos.y > Screen.height * .1f))
+						if ((mousePos.x >= Screen.width *.5f) && (pos.x < 30f) && (mousePos.y > Screen.height * .1f))
 						{
 		                	TapRight();
 		                }
-						else if ((mousePos.x < Screen.width *.5f) && (pos.x > -40f) && (mousePos.y > Screen.height * .1f)) 
+						else if ((mousePos.x < Screen.width *.5f) && (pos.x > -30f) && (mousePos.y > Screen.height * .1f)) 
 						{
 							TapLeft();
 						}
@@ -69,17 +69,17 @@ public class PlayerMovement : MonoBehaviour
     {
         pos += Vector3.left * 20f;
 
-        if (pos.x < -39f)
+        if (pos.x < -29f)
         {
-        	pos = new Vector2(-38.5f, pos.y);
+        	pos = new Vector2(-29.5f, pos.y);
         }
     }
     public void TapRight()
     {   
         pos += Vector3.right * 20f;
-        if (pos.x > 39f)
+        if (pos.x > 29f)
         {
-        	pos = new Vector2(38.5f, pos.y);
+        	pos = new Vector2(29.5f, pos.y);
         }
     }
 

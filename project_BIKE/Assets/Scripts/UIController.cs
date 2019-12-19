@@ -9,7 +9,7 @@ public class UIController : MonoBehaviour
 	private Button btnPlay, btnRight, btnLeft, btnSettings;
 	private GameRules gmRules;
 	public bool inMenu, inPlay, inLost, inPause;
-	public Text txtScore;
+	public Text txtScore, txtHighscore;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +19,8 @@ public class UIController : MonoBehaviour
     	inLost = false;
     	inPause = false;
         gmRules = GetComponent<GameRules>();
+
+        txtHighscore.text = "Highscore: " + PlayerPrefs.GetInt("n_highscore", 0);
     }
 
     // Update is called once per frame
@@ -46,6 +48,10 @@ public class UIController : MonoBehaviour
 
     	gmRules.GAMESPEED = 0;
 
+        // set the highscore!
+        if (gmRules.SCORE > PlayerPrefs.GetInt("n_highscore", 0))
+            PlayerPrefs.SetInt("n_highscore", (int)gmRules.SCORE);
+            
     	StartCoroutine(LostTimer(2));
     }
 
