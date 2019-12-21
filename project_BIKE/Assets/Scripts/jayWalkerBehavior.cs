@@ -36,6 +36,6 @@ public class jayWalkerBehavior : MonoBehaviour
     {
         pos += Vector2.down * gr.GAMESPEED * Time.deltaTime;
         pos += Vector2.left * directionSpd * Time.deltaTime;
-        transform.position = new Vector2(pos.x, pos.y);
+        transform.position = new Vector3(pos.x, pos.y, pos.y);
     }
 }

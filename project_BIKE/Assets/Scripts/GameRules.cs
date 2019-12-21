@@ -5,9 +5,9 @@ using UnityEngine;
 public class GameRules : MonoBehaviour
 {
 	public float GAMESPEED, SCORE;
-	public float spawnSeconds, jwalkerSpawnSeconds;
-	public int distance, jaywalkercounter, coneModeCounter;
-	public bool lost, stopCones;
+	public float spawnSeconds, jwalkerSpawnSeconds, motorSpawnSeconds, motorSpeedDifficulty;
+	public int distance, jaywalkercounter, coneModeCounter, motorcyclistCounter;
+	public bool lost, stopCones, motorcyclistsComing;
 
 	public GameObject spawnObj, warningObj;
 
@@ -24,9 +24,11 @@ public class GameRules : MonoBehaviour
     	uic = GetComponent<UIController>();
     	lost = false;
     	jaywalkercounter = 0;
+    	motorcyclistsComing = false;
 
-    	spawnSeconds = 1.6f;
+    	spawnSeconds = .7f;
     	jwalkerSpawnSeconds = .8f;
+    	motorSpeedDifficulty = 2.0f;
         spawnScript = spawnObj.GetComponent<spawner>();
     }
 
@@ -44,11 +46,6 @@ public class GameRules : MonoBehaviour
     			coroutine = spawntimer(spawnSeconds);
     			StartCoroutine(coroutine);
     			StartCoroutine(switchStopConesBool(10, true));
-    		}
-
-    		// Difficulty
-    		if (SCORE <= 10) {
-    			spawnSeconds = .7f;
     		}
     	}
         
@@ -70,9 +67,36 @@ public class GameRules : MonoBehaviour
     	// Depending on the boolean, spawn cones or jaywalkers
     	if (!stopCones)
     		StartCoroutine(spawntimer(spawnSeconds));
-    	else
-    		StartCoroutine(WaitForSecondsToSpawnJayWalker(3));
+    	else {
+    		// Decide motocyclists vs jaywalkers
+    		motorcyclistCounter = Random.Range(0, motorcyclistCounter);
+    		if (motorcyclistCounter == 1) {
+    			StartCoroutine(WaitForSecondsToSpawnMotorcyclists(3));
+    		} else {
+    			// After this goes for the first time, then motorcyclists have a chance to be spawned
+    			motorcyclistCounter = 2;
+    			StartCoroutine(WaitForSecondsToSpawnJayWalker(3));
+    		}
+    	}
     }
+
+    IEnumerator SpawnJaywalkers(float secs) 
+    {
+    	yield return new WaitForSeconds(secs);
+    	float chance = Random.Range(0, SCORE);
+    	spawnScript.spawnJaywalkers(distance, chance);
+
+		// Depending on the boolean, gp back to spawning cones or jaywalkers
+    	if (stopCones) {
+    		StartCoroutine(SpawnJaywalkers(jwalkerSpawnSeconds));
+    	}
+    	else{
+    		StartCoroutine(spawntimer(3)); // go back to cones, but give some time for the warning to go by
+    		Instantiate(warningObj, new Vector2(90f, 0), Quaternion.identity);
+    	}
+
+    }
+
     IEnumerator WaitForSecondsToSpawnJayWalker(float secs) 
     {
     	// Give a warning!
@@ -86,20 +110,29 @@ public class GameRules : MonoBehaviour
     	StartCoroutine(SpawnJaywalkers(jwalkerSpawnSeconds));
     }
 
-    IEnumerator SpawnJaywalkers(float secs) 
+    IEnumerator SpawnMotorcyclists(float secs) 
     {
     	yield return new WaitForSeconds(secs);
-    	float chance = Random.Range(0, SCORE);
-    	spawnScript.spawnJaywalkers(distance, chance);
+    	spawnScript.spawnMotorcyclists(distance);
 
 		// Depending on the boolean, gp back to spawning cones or jaywalkers
     	if (stopCones)
-    		StartCoroutine(SpawnJaywalkers(jwalkerSpawnSeconds));
+    		StartCoroutine(SpawnMotorcyclists(motorSpawnSeconds));
     	else{
     		StartCoroutine(spawntimer(3)); // go back to cones, but give some time for the warning to go by
     		Instantiate(warningObj, new Vector2(90f, 0), Quaternion.identity);
     	}
 
+    }
+
+    IEnumerator WaitForSecondsToSpawnMotorcyclists(float secs) 
+    {
+    	// Give a warning!
+    	Instantiate(warningObj, new Vector2(90f, 0), Quaternion.identity);
+    	yield return new WaitForSeconds(secs);
+
+    	spawnScript.spawnMotorcyclists(distance);
+    	StartCoroutine(SpawnMotorcyclists(motorSpawnSeconds));
     }
 
     IEnumerator switchStopConesBool(int secs, bool stop)
@@ -108,26 +141,37 @@ public class GameRules : MonoBehaviour
    		int length;
    		stopCones = stop;
    		if (stopCones) {
+
    			// Time to turn it back to cones
-   			length = Random.Range(10, 20);
    			coneModeCounter++;
+   			length = Random.Range(12, 22);
+
    			// Make it more difficult based on the amount of times it goes to jaywalkers
    			if (coneModeCounter == 1) {
    				jwalkerSpawnSeconds = .8f;
+   				motorSpawnSeconds = .3f;
+   				motorSpeedDifficulty = 3f;
    			}
    			else if (coneModeCounter == 2) {
    				jwalkerSpawnSeconds =.7f;
+   				motorSpawnSeconds = .3f;
+   				motorSpeedDifficulty = 3.2f;
    			} 
    			else if (coneModeCounter == 3) {
    				jwalkerSpawnSeconds = .6f;
+   				motorSpawnSeconds = .25f;
+   				motorSpeedDifficulty = 3.4f;
    			}
    			else if (coneModeCounter == 4) {
    				jwalkerSpawnSeconds = .57f;
+   				motorSpawnSeconds = .4f;
+   				motorSpeedDifficulty = 3.5f;
    			}
-   				
+
    		} else {
-   			// Time to turn it to jaywalker
-   			length = Random.Range(20, 35);
+   			// Time to turn it to jaywalker or motorcyclist
+   			length = Random.Range(15, 28);
+
    			jaywalkercounter++;
    			// Make it more difficult based on the amount of times it goes to jaywalkers
    			if (jaywalkercounter == 1) {

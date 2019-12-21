@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Dec 19 17:27:55 CST 2019
+#Fri Dec 20 20:05:47 CST 2019
 5.base=C\:\\Users\\Alec\\Documents\\GitHub\\project_BIKE\\project_BIKE\\Temp\\gradleOut\\build\\intermediates\\merged_assets\\release\\out
 22.path=bin/Data/Managed/etc/mono/2.0/machine.config
 32.set=ASSET

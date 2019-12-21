@@ -54,6 +54,7 @@
 		<type fullname="camera_movement" preserve="nothing"/>
 		<type fullname="changePlayer" preserve="nothing"/>
 		<type fullname="jayWalkerBehavior" preserve="nothing"/>
+		<type fullname="motorcyclistBehavior" preserve="nothing"/>
 		<type fullname="onLoadGM" preserve="nothing"/>
 		<type fullname="remover" preserve="nothing"/>
 		<type fullname="scoreTriggerBehavior" preserve="nothing"/>

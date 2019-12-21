@@ -1651,6 +1651,8 @@ MonoBehaviour:
     type: 3}
   jaywalkerScorer: {fileID: 300220410566246606, guid: 81e470b354595314d888e5f6bccc7c09,
     type: 3}
+  motorCyclistScorer: {fileID: 8507976377969431865, guid: 998a0fcfbe74a9c45822752438ffabb1,
+    type: 3}
   player: {fileID: 1982247142}
   warningObj: {fileID: 2962450373933577744, guid: 565b9671d8610dd4e880aa5c8095a089,
     type: 3}
@@ -2112,11 +2114,15 @@ MonoBehaviour:
   SCORE: 0
   spawnSeconds: 0
   jwalkerSpawnSeconds: 0
+  motorSpawnSeconds: 0
+  motorSpeedDifficulty: 0
   distance: 0
   jaywalkercounter: 0
   coneModeCounter: 0
+  motorcyclistCounter: 0
   lost: 0
   stopCones: 0
+  motorcyclistsComing: 0
   spawnObj: {fileID: 1744867910}
   warningObj: {fileID: 2962450373933577744, guid: 565b9671d8610dd4e880aa5c8095a089,
     type: 3}
