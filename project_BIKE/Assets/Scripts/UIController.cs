@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-	public GameObject menuUI, lostUI, gameplayUI;
+	public GameObject menuUI, lostUI, gameplayUI, settingsUI;
 	private Button btnPlay, btnRight, btnLeft, btnSettings;
 	private GameRules gmRules;
 	public bool inMenu, inPlay, inLost, inPause;
@@ -34,8 +34,14 @@ public class UIController : MonoBehaviour
     	inMenu = false;
     	turnOffMenuUI();
     	turnOngamePlayUI();
+    }
 
+    public void GOTOSETTINGS() {
+        turnOnSettingsUI();
+    }
 
+    public void LEAVESETTINGS() {
+        turnOffSettingsUI();
     }
 
     public void UPDATESCORE(float scre) {
@@ -66,6 +72,14 @@ public class UIController : MonoBehaviour
     }
     private void turnOffMenuUI(){
     	menuUI.SetActive(false);
+    }
+    private void turnOnSettingsUI(){
+        menuUI.SetActive(false);
+        settingsUI.SetActive(true);
+    }
+    private void turnOffSettingsUI(){
+        menuUI.SetActive(true);
+        settingsUI.SetActive(false);
     }
 
     IEnumerator LostTimer(int time)
