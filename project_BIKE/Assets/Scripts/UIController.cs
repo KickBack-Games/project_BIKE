@@ -6,7 +6,18 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
 	public GameObject menuUI, lostUI, gameplayUI, settingsUI;
+
+	// create an empty GO for the sound settings menu
+	public GameObject soundSettingsUI;
+
 	private Button btnPlay, btnRight, btnLeft, btnSettings;
+
+	// all the btns in settings
+	private Button btnSetBack, btnSetSound, btnSetFAQ,
+				   btnSetLeaderboard, btnSetAchievements, btnSetLike,
+				   btnSetStatistics, btnSetDeleteProgress, btnSetNews,
+				   btnSetCredits;
+
 	private GameRules gmRules;
 	public bool inMenu, inPlay, inLost, inPause;
 	public Text txtScore, txtHighscore;
@@ -42,6 +53,16 @@ public class UIController : MonoBehaviour
 
     public void LEAVESETTINGS() {
         turnOffSettingsUI();
+    }
+
+    // Enter sound settings window
+    public void GOTOSOUNDSETTINGS(){
+    	turnOnSoundSettingsUI();
+    }
+
+    // Leave sound settings window
+    public void LEAVESOUNDSETTINGS(){
+    	turnOffSoundSettingsUI();
     }
 
     public void UPDATESCORE(float scre) {
@@ -80,6 +101,18 @@ public class UIController : MonoBehaviour
     private void turnOffSettingsUI(){
         menuUI.SetActive(true);
         settingsUI.SetActive(false);
+    }
+
+    // Hide settingsUI but not bring back Main Menu UI
+    private void turnOnSoundSettingsUI(){
+    	settingsUI.SetActive(false);
+    	soundSettingsUI.SetActive(true);
+    }
+
+    // Back to SettingsUI
+    private void turnOffSoundSettingsUI(){
+    	soundSettingsUI.SetActive(false);
+    	settingsUI.SetActive(true);
     }
 
     IEnumerator LostTimer(int time)
