@@ -150,22 +150,22 @@ public class GameRules : MonoBehaviour
    			if (coneModeCounter == 1) {
    				jwalkerSpawnSeconds = .8f;
    				motorSpawnSeconds = .3f;
-   				motorSpeedDifficulty = 3f;
+   				motorSpeedDifficulty = 1.5f;
    			}
    			else if (coneModeCounter == 2) {
    				jwalkerSpawnSeconds =.7f;
-   				motorSpawnSeconds = .3f;
-   				motorSpeedDifficulty = 3.2f;
+   				motorSpawnSeconds = .28f;
+   				motorSpeedDifficulty = 1.6f;
    			} 
    			else if (coneModeCounter == 3) {
    				jwalkerSpawnSeconds = .6f;
-   				motorSpawnSeconds = .25f;
-   				motorSpeedDifficulty = 3.4f;
+   				motorSpawnSeconds = .26f;
+   				motorSpeedDifficulty = 1.6f;
    			}
    			else if (coneModeCounter == 4) {
    				jwalkerSpawnSeconds = .57f;
-   				motorSpawnSeconds = .4f;
-   				motorSpeedDifficulty = 3.5f;
+   				motorSpawnSeconds = .23f;
+   				motorSpeedDifficulty = 1.85f;
    			}
 
    		} else {
@@ -175,16 +175,19 @@ public class GameRules : MonoBehaviour
    			jaywalkercounter++;
    			// Make it more difficult based on the amount of times it goes to jaywalkers
    			if (jaywalkercounter == 1) {
-   				spawnSeconds = .6f;
+   				spawnSeconds = .65f;
    			}
    			else if (jaywalkercounter == 2) {
-   				spawnSeconds =.55f;
+   				spawnSeconds =.6f;
    			} 
    			else if (jaywalkercounter == 3) {
-   				spawnSeconds = .53f;
+   				spawnSeconds = .58f;
    			}
    			else if (jaywalkercounter == 4) {
-   				spawnSeconds = .52f;
+   				spawnSeconds = .57f;
+   			}
+   			else if (jaywalkercounter == 5) {
+   				spawnSeconds = .55f;
    			}
    		}
    		StartCoroutine(switchStopConesBool(length, !stop));

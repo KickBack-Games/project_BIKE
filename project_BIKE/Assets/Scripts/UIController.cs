@@ -68,6 +68,14 @@ public class UIController : MonoBehaviour
     public void UPDATESCORE(float scre) {
     	txtScore.text = scre.ToString();
     }
+    public void REPLAY() {
+        print("Spending money to replay!");
+        keepPlaying();
+    }
+    public void NOREPLAY() {
+        print("Not Spending money. Finish game.");
+        Application.LoadLevel (Application.loadedLevelName);
+    }
 
     public void LOST() {
     	inPlay = false;
@@ -82,6 +90,19 @@ public class UIController : MonoBehaviour
     	StartCoroutine(LostTimer(2));
     }
 
+    // These functions are to be used by public functions.
+
+    private void keepPlaying() {
+        inPlay = true;
+        inLost = false;
+
+        Time.timeScale = 1;
+        gmRules.GAMESPEED = -75;  // This is the regular gamespeed
+        turnOffLostUI();
+
+    }
+
+    
     private void turnOngamePlayUI(){
     	gameplayUI.SetActive(true);
     }
@@ -115,10 +136,20 @@ public class UIController : MonoBehaviour
     	settingsUI.SetActive(true);
     }
 
+    // Show lostUI
+    private void turnOnLostUI(){
+        lostUI.SetActive(true);
+    }
+
+    // Hide Lost UI
+    private void turnOffLostUI(){
+        lostUI.SetActive(false);
+    }
+
     IEnumerator LostTimer(int time)
     {
     	yield return new WaitForSeconds(time);
-    	Application.LoadLevel (Application.loadedLevelName);
-    	
+        Time.timeScale = 0;
+        turnOnLostUI();
     }
 }
