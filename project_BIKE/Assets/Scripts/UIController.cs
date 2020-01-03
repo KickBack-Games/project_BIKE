@@ -18,6 +18,9 @@ public class UIController : MonoBehaviour
 				   btnSetStatistics, btnSetDeleteProgress, btnSetNews,
 				   btnSetCredits;
 
+    // Btns in Lost UI
+    public Button btnReplay;
+
 	private GameRules gmRules;
 	public bool inMenu, inPlay, inLost, inPause;
 	public Text txtScore, txtHighscore;
@@ -74,6 +77,13 @@ public class UIController : MonoBehaviour
     }
     public void NOREPLAY() {
         print("Not Spending money. Finish game.");
+
+        // set the highscore!
+        if (gmRules.SCORE > PlayerPrefs.GetInt("n_highscore", 0))
+            PlayerPrefs.SetInt("n_highscore", (int)gmRules.SCORE);
+
+        Time.timeScale = 1;
+        gmRules.GAMESPEED = -75;  // This is the regular gamespeed
         Application.LoadLevel (Application.loadedLevelName);
     }
 
@@ -81,13 +91,10 @@ public class UIController : MonoBehaviour
     	inPlay = false;
     	inLost = true;
 
+        Time.timeScale = 0;
     	gmRules.GAMESPEED = 0;
 
-        // set the highscore!
-        if (gmRules.SCORE > PlayerPrefs.GetInt("n_highscore", 0))
-            PlayerPrefs.SetInt("n_highscore", (int)gmRules.SCORE);
-            
-    	StartCoroutine(LostTimer(2));
+        turnOnLostUI();
     }
 
     // These functions are to be used by public functions.
@@ -98,7 +105,14 @@ public class UIController : MonoBehaviour
 
         Time.timeScale = 1;
         gmRules.GAMESPEED = -75;  // This is the regular gamespeed
+
+        // Make the button uninteractable for the rest of the game. Can only retry once
+        btnReplay.interactable = false;
         turnOffLostUI();
+
+        // Spawn destroyer to clear the screen
+        gmRules.clearScreen();
+
 
     }
 
@@ -146,10 +160,10 @@ public class UIController : MonoBehaviour
         lostUI.SetActive(false);
     }
 
-    IEnumerator LostTimer(int time)
+    IEnumerator LostTimer(float time)
     {
     	yield return new WaitForSeconds(time);
-        Time.timeScale = 0;
-        turnOnLostUI();
+        
+        
     }
 }

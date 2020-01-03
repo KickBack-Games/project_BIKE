@@ -545,7 +545,7 @@ GameObject:
   - component: {fileID: 97088844}
   - component: {fileID: 97088846}
   - component: {fileID: 97088845}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: coneKiller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2551,7 +2551,7 @@ GameObject:
   - component: {fileID: 998293589}
   - component: {fileID: 998293593}
   - component: {fileID: 998293592}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: player1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2822,7 +2822,7 @@ GameObject:
   - component: {fileID: 1055095372}
   - component: {fileID: 1055095371}
   - component: {fileID: 1055095370}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: scoreTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5140,7 +5140,7 @@ GameObject:
   - component: {fileID: 1982247144}
   - component: {fileID: 1982247147}
   - component: {fileID: 1982247146}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PLAYERS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5385,11 +5385,14 @@ MonoBehaviour:
   jaywalkercounter: 0
   coneModeCounter: 0
   motorcyclistCounter: 0
+  replayLimit: 0
   lost: 0
   stopCones: 0
   motorcyclistsComing: 0
   spawnObj: {fileID: 1744867910}
   warningObj: {fileID: 2962450373933577744, guid: 565b9671d8610dd4e880aa5c8095a089,
+    type: 3}
+  clearScreenObj: {fileID: 243431420015859782, guid: 9a60f4e95e798904fbb3e85bd897575a,
     type: 3}
 --- !u!114 &2108927600
 MonoBehaviour:
@@ -5408,6 +5411,7 @@ MonoBehaviour:
   gameplayUI: {fileID: 527615568}
   settingsUI: {fileID: 1793621588}
   soundSettingsUI: {fileID: 401992627}
+  btnReplay: {fileID: 1415523675}
   inMenu: 0
   inPlay: 0
   inLost: 0
@@ -5427,7 +5431,7 @@ GameObject:
   - component: {fileID: 2114653309}
   - component: {fileID: 2114653307}
   - component: {fileID: 2114653306}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: player0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

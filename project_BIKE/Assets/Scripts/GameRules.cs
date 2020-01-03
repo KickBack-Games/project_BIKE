@@ -6,10 +6,10 @@ public class GameRules : MonoBehaviour
 {
 	public float GAMESPEED, SCORE;
 	public float spawnSeconds, jwalkerSpawnSeconds, motorSpawnSeconds, motorSpeedDifficulty;
-	public int distance, jaywalkercounter, coneModeCounter, motorcyclistCounter;
+	public int distance, jaywalkercounter, coneModeCounter, motorcyclistCounter, replayLimit;
 	public bool lost, stopCones, motorcyclistsComing;
 
-	public GameObject spawnObj, warningObj;
+	public GameObject spawnObj, warningObj, clearScreenObj;
 
 	private IEnumerator coroutine;
 
@@ -30,6 +30,7 @@ public class GameRules : MonoBehaviour
     	jwalkerSpawnSeconds = .8f;
     	motorSpeedDifficulty = 2.0f;
         spawnScript = spawnObj.GetComponent<spawner>();
+        replayLimit = 1;
     }
 
     // Update is called once per frame
@@ -57,6 +58,10 @@ public class GameRules : MonoBehaviour
 
     	// Make a function to update the score text.
     	uic.UPDATESCORE(SCORE);
+    }
+
+    public void clearScreen() {
+    	Instantiate(clearScreenObj, new Vector2(0f, 0f), Quaternion.identity);
     }
 
     IEnumerator spawntimer(float secs)
