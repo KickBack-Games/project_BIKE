@@ -16,12 +16,6 @@ ScriptsOnlyBuild:
     - scoreTriggerBehavior
     - spawner
     - warningBehavior
-    Unity.2D.Tilemap.Editor.dll:
-    - UnityEditor.Tilemaps.GridPaintingState
-    - UnityEditor.Tilemaps.GridPaletteBrushes
-    - UnityEditor.Tilemaps.GridPalettes
-    - UnityEditor.Tilemaps.SceneViewGridManager
-    - UnityEditor.Tilemaps.TileDragAndDropManager
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
@@ -30,6 +24,7 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
+    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -39,7 +34,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Image
     - UnityEngine.UI.Text
   sceneClasses:
-    Assets/Scenes/SampleScene.unity:
+    Assets/Scenes/Settings_scene.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -69,47 +64,47 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9660}
     - Class: 114
-      Script: {instanceID: 9708}
+      Script: {instanceID: 9704}
     - Class: 114
-      Script: {instanceID: 9824}
+      Script: {instanceID: 9810}
     - Class: 114
-      Script: {instanceID: 9864}
+      Script: {instanceID: 9850}
     - Class: 114
-      Script: {instanceID: 9886}
+      Script: {instanceID: 9872}
     - Class: 114
-      Script: {instanceID: 10046}
+      Script: {instanceID: 10020}
     - Class: 114
-      Script: {instanceID: 10242}
+      Script: {instanceID: 10198}
     - Class: 114
-      Script: {instanceID: 10268}
+      Script: {instanceID: 10222}
     - Class: 114
-      Script: {instanceID: 10350}
+      Script: {instanceID: 10300}
     - Class: 114
-      Script: {instanceID: 10358}
+      Script: {instanceID: 10308}
     - Class: 114
-      Script: {instanceID: 10420}
+      Script: {instanceID: 10362}
     - Class: 114
-      Script: {instanceID: 10554}
+      Script: {instanceID: 10486}
     - Class: 114
-      Script: {instanceID: 10590}
+      Script: {instanceID: 10518}
     - Class: 114
-      Script: {instanceID: 10646}
+      Script: {instanceID: 10568}
     - Class: 114
-      Script: {instanceID: 10806}
+      Script: {instanceID: 10720}
     - Class: 114
-      Script: {instanceID: 10926}
+      Script: {instanceID: 10832}
     - Class: 114
-      Script: {instanceID: 10962}
+      Script: {instanceID: 10864}
     - Class: 114
-      Script: {instanceID: 11068}
+      Script: {instanceID: 10960}
     - Class: 114
-      Script: {instanceID: 11126}
+      Script: {instanceID: 11014}
     - Class: 114
-      Script: {instanceID: 11150}
+      Script: {instanceID: 11036}
     - Class: 114
-      Script: {instanceID: 11220}
+      Script: {instanceID: 11096}
     - Class: 114
-      Script: {instanceID: 11502}
+      Script: {instanceID: 11358}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -645,5 +640,5 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   platform: 13
   scenePathNames:
-  - Assets/Scenes/SampleScene.unity
-  playerPath: C:/Users/Alec/Desktop/app builds/bikegametest2.apk
+  - Assets/Scenes/Settings_scene.unity
+  playerPath: D:/Github/project_BIKE/project_BIKE/t2.apk
