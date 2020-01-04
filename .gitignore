@@ -1,3 +1,20 @@
+# This .gitignore file should be placed at the root of your Unity project directory
+#
+# Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
+#
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Mm]emoryCaptures/
+
+# Asset meta data should only be ignored when the corresponding asset is also ignored
+!/[Aa]ssets/**/*.meta
+
+# Unity3D generated file on crash reports
+sysinfo.txt
 
 project_BIKE/Temp/UnityTempFile-fab8eaf69a21381458888a95b0b4c0b5
 project_BIKE/Temp/UnityTempFile-f26d335e9e77afd4c82c5a0a41397911
@@ -3943,3 +3960,4 @@ project_BIKE/Temp/UnityTempFile-ae2e6622dcf0da54cbcf264714d3fd7b
 project_BIKE/Temp/UnityTempFile-cd2edf8c316ac9d4d9de3f197ca98bde
 project_BIKE/Temp/UnityTempFile-e90414d82a14895448b358cafc32480d
 project_BIKE/Temp/UnityTempFile-fd12f3765fe3d964a83ed2da6dc7f397
+project_BIKE/Library/metadata/3d/3d25fdf03a65bf84399952927e70a84c
