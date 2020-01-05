@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GameRules : MonoBehaviour
 {
-	public float GAMESPEED, SCORE;
+	public float GAMESPEED, SCORE, COINS, COINSFORREPLAY;
 	public float spawnSeconds, jwalkerSpawnSeconds, motorSpawnSeconds, motorSpeedDifficulty;
-	public int distance, jaywalkercounter, coneModeCounter, motorcyclistCounter, replayLimit;
+	public int distance, jaywalkercounter, coneModeCounter, motorcyclistCounter;
 	public bool lost, stopCones, motorcyclistsComing;
 
 	public GameObject spawnObj, warningObj, clearScreenObj;
@@ -30,7 +30,9 @@ public class GameRules : MonoBehaviour
     	jwalkerSpawnSeconds = .8f;
     	motorSpeedDifficulty = 2.0f;
         spawnScript = spawnObj.GetComponent<spawner>();
-        replayLimit = 1;
+        //PlayerPrefs.SetInt("PlayerCoins", 0);
+        COINS = PlayerPrefs.GetInt("PlayerCoins", 0);
+        COINSFORREPLAY = 75;
     }
 
     // Update is called once per frame
@@ -62,6 +64,49 @@ public class GameRules : MonoBehaviour
 
     public void clearScreen() {
     	Instantiate(clearScreenObj, new Vector2(0f, 0f), Quaternion.identity);
+    }
+
+    // This function calculates the amount of coins given to player at the end of run.
+    public void EndOfRunCoinAddition() {
+    	print("CURRENTLY: " + COINS );
+    	COINS = PlayerPrefs.GetInt("PlayerCoins", 0);
+    	COINS += returnCoinsCalculation(SCORE);
+    	PlayerPrefs.SetInt("PlayerCoins", (int)COINS);
+    	print("TOTAL CURRENT COINS: " + (int)COINS);
+
+    }
+
+    public void setCoins(float coins) {
+    	COINS += coins;
+    	PlayerPrefs.SetInt("PlayerCoins", (int)COINS);
+    }
+
+    private int returnCoinsCalculation(float scoreTotal) {
+    	print("TOTAL SCORE: " + scoreTotal);
+    	// Every 10 cones will give the player 1 coin.
+    	int everyTenIsOneCoin = (int)(scoreTotal / 10); 
+    	print("Every 10: " + everyTenIsOneCoin);
+    	// Upon completion of the run half of the distance will turn into coins. (will make it one quarter... 1/4)
+    	int quarterOfFinalScore = (int)(scoreTotal / 4);
+    	print("Final 4: " + quarterOfFinalScore);
+
+    	// If you got past 100 cones you receive 25 coins for the distance + 10 coins from each set of 10 cones passed. 
+    	if (scoreTotal >= 100) {
+    		print("HERE");
+    		// Add 25 coins to any of the variables that are already created... no big deal. Just going to the main total anyway
+    		quarterOfFinalScore += 25;
+
+    		// add 5 coins for every set of 10. So use prior variable that already has the amount of sets of 10's
+    		// Subtracting because it's added for every other set of 10 after 100... the first 10, where the first 100... so 
+    		// Take away 10 to make it adding 5 coins for every set of 10 AFTER the FIRST 100...
+    		everyTenIsOneCoin += (everyTenIsOneCoin - 10) * 5;
+    		print("Every 100 after 100: " + everyTenIsOneCoin);
+    	}
+    	int total = quarterOfFinalScore + everyTenIsOneCoin;
+    	print("Total: " + total);
+    	// ADD THE TOTALS AND RETURN THEM
+    	return total;
+
     }
 
     IEnumerator spawntimer(float secs)

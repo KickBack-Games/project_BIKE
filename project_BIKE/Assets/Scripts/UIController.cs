@@ -23,7 +23,7 @@ public class UIController : MonoBehaviour
 
 	private GameRules gmRules;
 	public bool inMenu, inPlay, inLost, inPause;
-	public Text txtScore, txtHighscore;
+	public Text txtScore, txtHighscore, txtCoins;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +34,7 @@ public class UIController : MonoBehaviour
     	inPause = false;
         gmRules = GetComponent<GameRules>();
 
+        setCoinText();
         txtHighscore.text = "Highscore: " + PlayerPrefs.GetInt("n_highscore", 0);
     }
 
@@ -84,6 +85,10 @@ public class UIController : MonoBehaviour
 
         Time.timeScale = 1;
         gmRules.GAMESPEED = -75;  // This is the regular gamespeed
+        // Calculate coins earned.
+        gmRules.EndOfRunCoinAddition();
+
+        // Reset the scene
         Application.LoadLevel (Application.loadedLevelName);
     }
 
@@ -95,6 +100,13 @@ public class UIController : MonoBehaviour
     	gmRules.GAMESPEED = 0;
 
         turnOnLostUI();
+        if (gmRules.COINS < gmRules.COINSFORREPLAY) {
+            btnReplay.interactable = false;
+        }
+    }
+
+    public void setCoinText() {
+        txtCoins.text = "Coins: " + PlayerPrefs.GetInt("PlayerCoins", 0).ToString();
     }
 
     // These functions are to be used by public functions.
@@ -102,6 +114,9 @@ public class UIController : MonoBehaviour
     private void keepPlaying() {
         inPlay = true;
         inLost = false;
+
+        // Decrease coins!
+        gmRules.setCoins(-75);
 
         Time.timeScale = 1;
         gmRules.GAMESPEED = -75;  // This is the regular gamespeed
@@ -112,7 +127,6 @@ public class UIController : MonoBehaviour
 
         // Spawn destroyer to clear the screen
         gmRules.clearScreen();
-
 
     }
 
